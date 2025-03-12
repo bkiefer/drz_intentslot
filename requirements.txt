@@ -1,0 +1,8 @@
+transformers==4.47.1
+adapters==1.1.0
+torch==2.6.0
+datasets==3.3.2
+scikit-learn~=1.6.1
+
+Flask~=3.1.0
+waitress~=3.0.2

@@ -1,0 +1,6 @@
+**/adapters/
+bert-base-german-cased
+.idea
+.projectile
+__pycache__
+logs
