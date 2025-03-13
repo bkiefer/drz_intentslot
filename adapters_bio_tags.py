@@ -13,6 +13,8 @@ from transformers import AutoTokenizer, AutoConfig
 from adapters_bio_tags_server import merge_labels
 
 os.environ["WANDB_DISABLED"] = "true"
+# all_samples needs batch_size=8 and class_weights (4, 4, 1.0) for similiar
+# results (multiple tries)
 label_type = "neg_samples"  # "all_samples" "neg_samples"
 device = "cuda" if torch.cuda.is_available() else "cpu"
 max_len_bio = 128
