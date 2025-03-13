@@ -123,12 +123,13 @@ def train_task(task):
     class_weights = torch.FloatTensor([1.5, 1.5, 1.0]).to(device)
     loss_function = nn.CrossEntropyLoss(weight=class_weights)
     no_decay = ["bias", "LayerNorm.weight"]
-    optimizer_grouped_parameters = [{ "params": [p for n, p in model.named_parameters() if
-                                                not any(nd in n for nd in no_decay)],
-                                      "weight_decay": 1e-4, },
-                                    { "params": [p for n, p in model.named_parameters() if
-                                                 any(nd in n for nd in no_decay)],
-                                      "weight_decay": 0.0, }, ]
+    optimizer_grouped_parameters = [
+        { "params": [p for n, p in model.named_parameters() if
+                     not any(nd in n for nd in no_decay)],
+          "weight_decay": 1e-4, },
+        { "params": [p for n, p in model.named_parameters() if
+                     any(nd in n for nd in no_decay)],
+          "weight_decay": 0.0, }, ]
     optimizer = torch.optim.AdamW(params=optimizer_grouped_parameters, lr=1e-3)
 
     prev_smallest_dev_loss = None
@@ -173,7 +174,7 @@ def train_task(task):
                 best_epoch = epoch
                 prev_smallest_dev_loss = cur_epoch_dev_loss
 
-            if epoch % 5 == 0:
+            if epoch % 5 == 0 or cur_epoch_dev_loss <= prev_smallest_dev_loss:
                 true_labels = torch.flatten(torch.cat(expected_list)).cpu().numpy()
                 predicted_labels = torch.flatten(torch.cat(predictions_list)).cpu().numpy()
                 print(confusion_matrix(true_labels, predicted_labels))
@@ -240,7 +241,7 @@ def eval_task(task):
             merged_expected = batch["tags"][k].split()
             merged_predictions_list.extend(merged_predicted)
             merged_expected_list.extend(merged_expected)
-    print("Test set evaluation!")
+    print(f"Test set evaluation for {task}!")
     true_labels = torch.flatten(torch.cat(expected_list)).cpu().numpy()
     predicted_labels = torch.flatten(torch.cat(predictions_list)).cpu().numpy()
     print(confusion_matrix(true_labels, predicted_labels))

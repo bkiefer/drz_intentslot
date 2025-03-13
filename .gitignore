@@ -4,3 +4,6 @@ bert-base-german-cased
 .projectile
 __pycache__
 logs
+all_samples_csv/*dev.csv
+all_samples_csv/*train.csv
+all_samples_csv/*test.csv

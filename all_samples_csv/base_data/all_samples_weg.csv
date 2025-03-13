@@ -28,7 +28,7 @@ id,tokens,tags
 2427,D2 ist einsatzbereit das ist verstanden Bitte auf Übungsbeginn warten kommen,O O O O O O O O O O O
 2457,Für sie bitte die inbetriebnahme der Roboter D3 und D5 kommen,O O O O O O O O O O O
 429,D5 fährt zur Unterstützung des Angriffstrupps,O O O O O O
-1731,ja dann könnt ihr direkt mal erkunden wie aus der Position wo UGV zw  eins sich momentan befindet das andere Fass zu sehen war,O O O O O O O O O O O O O O O O O O O O O O O O O
+1731,ja dann könnt ihr direkt mal erkunden wie aus der Position wo UGV zw  eins sich momentan befindet das andere Fass zu sehen war,O O O O O O O O O O O O O O O O O O O O O O O O
 2180,Wenn du da nichts entdeckst weiter Richtung Osten,O O O O O O O O
 2133,Dann Foto machen,O O O
 406,Sie schneiden Holz mit der Motorkettensäge,O O O O O O
@@ -42,7 +42,7 @@ id,tokens,tags
 2156,Einsatzauftrag bitte aufsteigen Übersichtsfoto machen wenn möglich aus allen vier Himmelsrichtungen kommen,O O O O O O O O O O O O
 428,D4 meldet die Gefahrstoffe,O O O O
 370,Maschinist zur Unterstützung beim Aufbau der Wasserversorgung vor,O O O O O O O O
-1116,ich möchte mal dass du mit der   mit der Drohne jetzt weiter fliegst zum anderen Hochofen quasi von der anderen Seite der Einsatzstelle aus Fotos machst,O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+1116,ich möchte mal dass du mit der   mit der Drohne jetzt weiter fliegst zum anderen Hochofen quasi von der anderen Seite der Einsatzstelle aus Fotos machst,O O O O O O O O O O O O O O O O O O O O O O O O O O
 491,UAV bitte eine Gesamtübersicht von dem zentralen Gebäude,O O O O O O O O
 382,Angriffstrupp zur Brandbekämpfung mit dem Schaumstrahlrohr vor,O O O O O O O
 419,D3 zur Erkundung mit Thermalkamera in die Lagerhalle durch das Tor vor,O O O O O O O O B I I O
@@ -111,7 +111,7 @@ id,tokens,tags
 424,Drohnenoperator erkundet den Gefahrenbereich und macht die Bilder,O O O O O O O O
 360,Wassertrupp mit dem Rollschlauch zur Brandbekämpfung vor,O O O O O O O
 413,Der Trupp transportert die Verletzten mit hilfe von Krankentrage,O O O O O O O O O
-1229,Drohnenoperator starten Sie und über  machen Sie sich einen Überblick über die Lage,O O O O O O O O O O O O O O
+1229,Drohnenoperator starten Sie und über  machen Sie sich einen Überblick über die Lage,O O O O O O O O O O O O O
 368,Maschinist stellt die Pumpe bereit,O O O O O
 62,melden wenn Einsatzbereitschaft gegeben,O O O O
 363,Angriffstrupp mit der Schlauchbrücke zur Gefahrenquelle vor,O O O O O O O
@@ -153,7 +153,7 @@ id,tokens,tags
 2060,Wenn ihr gleich vorgeht bitte meldet mir die üblichen Gefahren an der Einsatzstelle Feuer Opfer,O O O O O O O O O O O O O O O
 375,Wassertrupp stellt die Wasserversorgung bereit,O O O O O
 2496,Für sie Paralleleinsatz der D2 geht zur Manipulation in die Lagerhalle vor für sie Bereitstellung eines Luftbildes aus der Halle kommen,O O O O O O O O O O O O O O O O O O O O O
-1177,wenn du jetzt startest den Hochofen der von euch weiter weg ist   von dort aus hätte ich gerne Bilder aus der Mitte zwischen den Hochöfen,O O O O O O O O O O O O O O O O O O O O O O O O O O O
+1177,wenn du jetzt startest den Hochofen der von euch weiter weg ist   von dort aus hätte ich gerne Bilder aus der Mitte zwischen den Hochöfen,O O O O O O O O O O O O O O O O O O O O O O O O O
 954,von oben uns Fotos machst und guckst wo wir ne Rauchentwicklung haben und auch mit der Infrarot Kamera,O O O O O O O O O O O O O O O O O O
 2612,Ja für sie Unterstützung durch Bildübertragung des D2 bei der Fassversiegelung kommen,O O O O O O O O O O O O
 2339,Halt deine Position,O O O
@@ -183,7 +183,7 @@ id,tokens,tags
 355,alle bitte hier zum Treffpunkt ans Zelt kommen,O O O O O O O O
 416,Sie transportieren die Person in der Schleifkorbtrage,O O O O O O O
 386,Schlauchtrupp zur Löschwasserentnahme über ein Saugschacht und ein Saugrohr vor,O O O O O O O O O O
-1846,möglicherweise sind dann auch Personen vermisst also Personensuche voran  bringen und dann eventuell noch nach der Schadenursache gucken,O O O O O O O O O O O O O O O O O O O
+1846,möglicherweise sind dann auch Personen vermisst also Personensuche voran  bringen und dann eventuell noch nach der Schadenursache gucken,O O O O O O O O O O O O O O O O O O
 2118,Kannst du mir mal grob deine Position auf der Karte durchgeben,O O O O O O O O O O O
 330,noch ein Bild schicken und das aber mit einem Schwarz Weiß Hintergrund,O O O O O O O O O O O O
 401,Trupp entfernt es mit dem Klappmesser,O O O O O O
@@ -225,7 +225,7 @@ id,tokens,tags
 897,neuer Auftrag lautet Suchen von Leckagen von Undichtigkeiten und Chemikalien,O O O O O O O O O O
 2217,Bleib mal gerade an der Position wir starten dich noch gerade neu,O O O O O O O O O O O O
 334,ja schick ich jetzt den Angriff dorthin zum Lesen aber wenn du direkt vorbeikommst dann mach nur ein näheres Foto als Nachweis,O O O O O O O O O O O O O O O O O O O O O O
-1373,Für sie Auftrag innerhalb des Gebäudes nach Hitze  und Rauchquellen suchen,O O O O O O O O O O O O
+1373,Für sie Auftrag innerhalb des Gebäudes nach Hitze  und Rauchquellen suchen,O O O O O O O O O O O
 403,Sie zerbrechen die Deckel mit der Holzaxt,O O O O O O O
 1459,ihr nehmt aber die westliche Richtung,O O O B I I
 1138,Lena dann flieg mal mit deinem Fluggerät da weiter ja weiter nach rechts würde ich jetzt erst mal sagen was immer auch rechts sein mag so wie du jetzt guckst quasi in deiner Position in Richtung deiner Position,O O O O O O O O O O B I I I I I I I I I I I I I I I I I I I I I I I I I I I
@@ -234,7 +234,7 @@ id,tokens,tags
 457,D2 schließt den Container mit dem Arm,O O O O O O O
 30,hast du eine Möglichkeit dass Fass näher zu identifizieren was da drin ist,O O O O O O O O O O O O O
 1817,Angriffstrupp und Schlauchtrupp bauen Geräteablage auf,O O O O O O
-434,Die Aufgabe für Sie   zur Sicherstellung des zweiten in der Bauordnung geforderten Rettungswegs mit der Drehleiter,O O O O O O O O O O O O O O O O O O
+434,Die Aufgabe für Sie   zur Sicherstellung des zweiten in der Bauordnung geforderten Rettungswegs mit der Drehleiter,O O O O O O O O O O O O O O O O
 427,D3 fährt in die Halle rein,O O O O O O
 2561,Für sie ist der Erkundungsauftrag beendet kommen,O O O O O O O
 450,Sie bewegen sich zum Fenster auf der rechten Seite,O O O O O O O O O
@@ -324,7 +324,7 @@ id,tokens,tags
 1952,dann bitte eine Probe nehmen,O O O O O
 2525,D3 mit Überfass ist am Standort angekommen für sie Beginn des Auftrages Bergung des Behältnisses kommen,O O O O O O O O O O O O O O O O
 1243,mehr Richtung Hochofen einmal schauen,O O O O O
-2171,Und jetzt fahrt ihr beide hintereinander her zum Punkt ASA 325   352 danke,O O O O O O O O O O O O O O O
+2171,Und jetzt fahrt ihr beide hintereinander her zum Punkt ASA 325   352 danke,O O O O O O O O O O O O O
 181,Maßnahme momentan warten wir machen hier gerade Übergabe,O O O O O O O O
 2302,Kannst du ein Foto machen,O O O O O
 390,Schlauchtrupp zur Löschwasserentnahme durch Unterflurhydrant vor,O O O O O O
