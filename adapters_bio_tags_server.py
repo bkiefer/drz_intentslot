@@ -48,6 +48,8 @@ adapters_dir: str = "adapters/" + data_type
 
 da_with_slot = [ 'Einsatzbefehl', 'Information_Geben' ]
 
+remove_punct = str.maketrans('', '', string.punctuation)
+
 @app.route('/alive')
 def alive() -> ResponseReturnValue:
     """
@@ -64,16 +66,11 @@ def annotate() -> ResponseReturnValue:
     :return: task specific entities in JSON format
     """
     try:
-        text = _get_text_from_request(request)
+        text, prev_text = _get_text_from_request(request)
     except Exception as e:
         logger.error(e)
         abort(400, description=e)
-    lines = text.splitlines()
-    result = []
-    for line in lines:
-        line_result = _annotate_line(line)
-        if line_result:
-            result.append(line_result)
+    result = _annotate_line(text, prev_text)
     return Response(json.dumps(result), status=200, mimetype='application/json')
 
 
@@ -83,12 +80,12 @@ def _get_text_from_request(req: Request) -> str:
     :return: text, linebreaks replaced by space
     """
     # TODO: we need a new model for that: speaker info is missing
-    #prev_text = None
+    prev_text = ''
     if req.method == 'GET':
         if 'text' not in req.args:
             raise ValueError("missing text")
         text = req.args.get('text', type=str, default='')
-        #prev_text = req.args.get('prev_text', type=str, default='')
+        prev_text = req.args.get('prev_text', type=str, default='')
     elif req.method == 'POST':
         if req.mimetype != 'multipart/form-data':
             raise ValueError(f"invalid content-type '{req.mimetype}', must be multipart/form-data")
@@ -97,7 +94,7 @@ def _get_text_from_request(req: Request) -> str:
         text = file.read().decode(encoding)
     else:
         raise ValueError(f"unsupported method '{req.method}'")
-    return text
+    return text, prev_text
 
 
 def tokenize(line: str):
@@ -147,9 +144,13 @@ def merge_labels(pred_labels, subtokens):
         merged_labels.append('O')
     return merged_labels[1:]
 
-def _annotate_line(line: str):
-    clean_line = line.translate(str.maketrans('', '', string.punctuation))
-    #subtokens = tokenize(clean_line)
+def _annotate_line(line: str, prev_line: str):
+    clean_line = line.translate(remove_punct)
+    if prev_line:
+        da_clean_line = (prev_line.translate(remove_punct) + ' [SEP] '
+                         + clean_line)
+    else:
+        da_clean_line = clean_line
 
     model.active_adapters = 'dact'
     model.active_head = 'dact'
@@ -157,7 +158,7 @@ def _annotate_line(line: str):
     dact_classifier = pipeline(model=model, tokenizer=tokenizer, device=device,
                                task='text-classification')
     turn_annotation = dict()
-    turn_annotation['dialogue_act'] = dact_classifier(clean_line)[0]['label']
+    turn_annotation['dialogue_act'] = dact_classifier(da_clean_line)[0]['label']
     if turn_annotation['dialogue_act'] in da_with_slot:
         turn_annotation.update(_annotate_line_slots(line))
     else:
@@ -166,7 +167,7 @@ def _annotate_line(line: str):
 
 
 def _annotate_line_slots(line: str) -> dict[str, dict[str, list[str]]]:
-    clean_line = line.translate(str.maketrans('', '', string.punctuation))
+    clean_line = line.translate(remove_punct)
     subtokens = tokenize(clean_line)
     encoded_line = tokenizer(clean_line, pad_to_max_length=True,
                              padding="max_length", max_length=max_len_bio,
