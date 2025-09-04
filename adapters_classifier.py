@@ -233,6 +233,10 @@ def evaluation():
     print("Accuracy:", round(match/len(intexts),3), "matched:", match, "total:", len(intexts))
     print("F1 scores:")
     f1scores = 0
+    all_tp = 0
+    all_f = 0
+    all_samples = 0
+    f1 = {}
     # compute f1 scores (per label)
     for label in all_labels:
         tp = scores[label]["tp"]
@@ -252,8 +256,17 @@ def evaluation():
             f1score = 0
         f1scores+=f1score
         print(label, "F1:", round(f1score,3))
+        all_tp += tp
+        all_f += fp + fn
+        f1[label] = f1score * (all_tp + all_f / 2)
+        all_samples = all_tp + all_f / 2
+    weight_f1 = 0
+    for label in all_labels:
+        weight_f1 += f1[label] / all_samples
     # compute macro f1 score (avg)
     print("Macro F1:", round(f1scores/len(all_labels),3))
+    print("Micro F1:", round( all_tp / (all_tp + .5 * all_f), 3))
+    print("Weighted F1:", round( weight_f1, 3))
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "-t":

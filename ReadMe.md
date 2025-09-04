@@ -12,17 +12,26 @@ git clone https://huggingface.co/bert-base-german-cased
 
 This is also necessary when the docker image is used with `run_docker.sh`
 
-# Start server
+# Start server locally
 
-```
-./adapters_bio_tags_server.py [-h <host>] [-p <port>]
-```
+First make sure you have proper `.venv` (we use `uv` for package management)
+
+    uv sync
+
+Now start the server
+
+    uv run ./adapters_bio_tags_server.py [-h <host>] [-p <port>]
+
+or
+
+    . .venv/bin/activate
+    ./adapters_bio_tags_server.py [-h <host>] [-p <port>]
 
 # Test server functionality
 
 You can check what the server returns using the following command line
 ```
-curl -G --data-urlencode 'text=Wassertrupp mit dem Rollschlauch zur Brandbekämpfung vor' 'http://localhost:5050/annotate'
+curl -G --data-urlencode 'text=Wassertrupp mit dem Rollschlauch zur Brandbekämpfung vor' --data-urlencode 'prev_text=Truppführer hört' 'http://localhost:5050/annotate'
 ```
 
 # Train slot tagging modules for DRZ (Einsatzbefehl)
