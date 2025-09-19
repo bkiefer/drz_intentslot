@@ -9,4 +9,4 @@ docker run -d --rm \
        -v "$(pwd)/bert-base-german-cased":/app/bert-base-german-cased \
        --gpus=all \
        --entrypoint=/bin/bash \
-       drz_daslot -c "python3 -u adapters_bio_tags_server.py 2>&1 | tee logs/server$(date -Iminutes).log"
+       drz_daslot -c "uv run python3 -u adapters_bio_tags_server.py 2>&1 | tee logs/server$(date -Iminutes).log"
