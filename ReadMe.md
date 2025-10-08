@@ -45,3 +45,31 @@ The same can be done for the dialogue act recognition: (current default mode: wi
 ```
 
 Models for the dialogue act classification must be moved to the appropriate folder to be usable by the server code.
+
+# Identify slots using an LLM
+
+Install **vLLM** to run inference with an LLM. Note: adapter tuning is performed without vLLM, however, vLLM is used to do inference with the tuned adapter.
+
+1. Inference with an LLM. 
+
+The task is defined as follows. Given an utterance and a type of slot we are interested in *(Auftrag, Einheit, Ziel, Weg, Mittel)*, the model is to generate the same utterance where the start and the end of the desired slot are marked with the ** symbols. If the given slot is absent, the model is to generate the utterance without any markers. The prompt for the task contains an instruction, slot definitions and 5 demonstrations, based on semantic similarity with the target utterance. The demonstrations are picked out from the training data. To do the inference, on DFKI cluster execute:
+
+```
+sbatch ./srun_scripts/slot_identification_llm.srun
+```
+
+2. Fine-tuning a LoRA adapter on top of an LLM. 
+
+The task is defined in the same way as before. The prompt used during training is similar, but the demonstrations are removed. The training is done using the training partition of the data. To tune an adapter, on DFKI cluster execute:
+
+```
+sbatch ./srun_scripts/slot_identification_llm_adapter.srun
+```
+
+To evaluate the tuned LoRA adapter, execute the following script on the DFKI cluster:
+
+```
+sbatch ./srun_scripts/slot_identification_llm_adapter_eval.srun
+```
+
+Note: Modify the virtual environment names/locations in the SRUN scripts, if needed.
