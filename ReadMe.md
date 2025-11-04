@@ -31,8 +31,18 @@ or
 
 You can check what the server returns using the following command line
 ```
-curl -G --data-urlencode 'text=Wassertrupp mit dem Rollschlauch zur Brandbekämpfung vor' --data-urlencode 'prev_text=Truppführer hört' 'http://localhost:5050/annotate'
+curl -G --data-urlencode 'text=Wassertrupp jetzt mit dem Rollschlauch zur Brandbekämpfung vorangehen!' --data-urlencode 'prev_text=Truppführer hört' 'http://localhost:5050/annotate'
 ```
+
+The server has the following endpoints:
+
+- `/alive` eventually returns "tag server is alive"
+- `/annotate` computes the intent according to the intent adapter and annotates the slots `einheit, auftrag mittel, ziel, weg` in case the result is `Einsatzbefehl` or `Information_Geben`.
+
+    The current list of possible intents is:
+    `Absage`, `Einsatzbefehl`, `Information_geben`, `Information_nachfragen`, `Kontakt_Anfrage`, `Kontakt_Bestaetigung`, `Sonstiges`, `Zusage`
+
+- `/annotate_slots` computes the slots for the utterance and returns them, in case it finds any
 
 # Train slot tagging modules for DRZ (Einsatzbefehl)
 This trains and evaluates a set of adapters for important information bits in DRZ radio communication. Training and evaluation can also be done with the docker image, since it contains all necessary functionality.

@@ -58,23 +58,40 @@ def alive() -> ResponseReturnValue:
     """
     return Response("tag server is alive", status=200, mimetype='text/html')
 
-
-@app.route('/annotate', methods=['GET', 'POST'])
-def annotate() -> ResponseReturnValue:
+def _annotate(callback):
     """
-    Top level entry point to annotate radio traffic with task specific entities
-    :return: task specific entities in JSON format
+    Entry point to annotate radio traffic.
+    :return: result in JSON format
     """
     try:
         text, prev_text = _get_text_from_request(request)
     except Exception as e:
         logger.error(e)
         abort(400, description=e)
-    result = _annotate_line(text, prev_text)
+    result = callback(text, prev_text)
     return Response(json.dumps(result), status=200, mimetype='application/json')
 
+@app.route('/annotate', methods=['GET', 'POST'])
+def annotate() -> ResponseReturnValue:
+    """
+    Top level entry point to annotate radio traffic with intent and eventually
+    task specific entities
+    :return: intent and task specific entities in JSON format
+    """
+    return _annotate(_annotate_line)
 
-def _get_text_from_request(req: Request) -> str:
+
+@app.route('/annotate_slots', methods=['GET', 'POST'])
+def annotate_slots() -> ResponseReturnValue:
+    """
+    Top level entry point to annotate radio traffic with intent and eventually
+    task specific entities
+    :return: intent and task specific entities in JSON format
+    """
+    return _annotate(_annotate_line_slots)
+
+
+def _get_text_from_request(req: Request) -> tuple[str, str]:
     """
     Extract text from request.
     :return: text, linebreaks replaced by space
@@ -144,7 +161,7 @@ def merge_labels(pred_labels, subtokens):
         merged_labels.append('O')
     return merged_labels[1:]
 
-def _annotate_line(line: str, prev_line: str):
+def _annotate_line(line: str, prev_line: str, force_slots:bool = False):
     clean_line = line.translate(remove_punct)
     if prev_line:
         da_clean_line = (prev_line.translate(remove_punct) + ' [SEP] '
@@ -159,14 +176,14 @@ def _annotate_line(line: str, prev_line: str):
                                task='text-classification')
     turn_annotation = dict()
     turn_annotation['dialogue_act'] = dact_classifier(da_clean_line)[0]['label']
-    if turn_annotation['dialogue_act'] in da_with_slot:
+    if force_slots or turn_annotation['dialogue_act'] in da_with_slot:
         turn_annotation.update(_annotate_line_slots(line))
     else:
         turn_annotation['text'] = line
     return turn_annotation
 
 
-def _annotate_line_slots(line: str) -> dict[str, dict[str, list[str]]]:
+def _annotate_line_slots(line: str, prev_line="") -> dict[str, dict[str, list[str]]]:
     clean_line = line.translate(remove_punct)
     subtokens = tokenize(clean_line)
     encoded_line = tokenizer(clean_line, pad_to_max_length=True,
