@@ -19,7 +19,7 @@ if docker images 2>&1 | grep -q drz_daslot; then
         sleep 3
     done
 else
-    uv run adapters_bio_tags_server.py >test.log 2>&1 &
+    uv run adapters_bio_tags_server.py >logs/test.log 2>&1 &
     until is_alive; do
         sleep 3
     done

@@ -31,6 +31,8 @@ or
 
 The script `test_drzintent.sh` will print `Success` if the server runs as expected, checking the 'alive' and 'annotate_slots' endpoints. If a docker image exists, it will check that instead of the local installation.
 
+In case something goes wrong, look into the latest log file in the `logs` folder for possible reasons, or for forwarding it to the developer in charge.
+
 You can check manually what the server returns using the following command line
 ```
 curl -G --data-urlencode 'text=Wassertrupp jetzt mit dem Rollschlauch zur Brandbekämpfung vorangehen!' --data-urlencode 'prev_text=Truppführer hört' 'http://localhost:5050/annotate'

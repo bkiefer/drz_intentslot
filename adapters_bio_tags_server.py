@@ -186,7 +186,7 @@ def _annotate_line(line: str, prev_line: str, force_slots:bool = False):
 def _annotate_line_slots(line: str, prev_line="") -> dict[str, dict[str, list[str]]]:
     clean_line = line.translate(remove_punct)
     subtokens = tokenize(clean_line)
-    encoded_line = tokenizer(clean_line, pad_to_max_length=True,
+    encoded_line = tokenizer(clean_line,
                              padding="max_length", max_length=max_len_bio,
                              truncation=True, add_special_tokens=True)
     tensor = torch.tensor([encoded_line['input_ids']]).to(device)
