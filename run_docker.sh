@@ -2,6 +2,7 @@
 #set -xe
 scrdir=`dirname "$0"`
 cd "$srcdir"
+version=`grep version "$scrdir/pyproject.toml" | sed 's/version *= *"\([^"]*\)".*/\1/'`
 
 if test -z "$DOCKER_ARGS"; then
     args=("-d", "--rm")
@@ -16,4 +17,4 @@ docker run "${args[@]}" \
        -v "$(pwd)/bert-base-german-cased":/app/bert-base-german-cased \
        --gpus=all \
        --entrypoint=/bin/bash \
-       drz_daslot -c "uv run adapters_bio_tags_server.py 2>&1 | tee logs/server$(date -Iminutes).log"
+       drz_daslot:$version -c "uv run adapters_bio_tags_server.py 2>&1 | tee logs/server$(date -Iminutes).log"
